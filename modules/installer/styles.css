@@ -1,0 +1,86 @@
+.spinner {
+  width: 30px;
+  height: 30px;
+  background-color: #E0E0E0;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin: -15px;
+  -webkit-animation: rotateplane 1.2s infinite ease-in-out;
+  animation: rotateplane 1.2s infinite ease-in-out;
+}
+
+@-webkit-keyframes rotateplane {
+  0% { -webkit-transform: perspective(120px) }
+  50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+}
+
+@keyframes rotateplane {
+  0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+  } 50% {
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+  } 100% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
+}
+
+body {
+    margin: 0;
+    background: #333;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.log {
+    width: 900px;
+    margin: 100px auto;
+}
+
+input {
+    display: block;
+    background: transparent;
+    border: none;
+    border-bottom: 2px dotted gray;
+    margin-bottom: 20px;
+    font-size: 17px;
+    font-family: 'Open Sans',sans-serif;
+    width: 880px;
+    color: rgb(91, 150, 242);
+    outline: none;
+}
+
+h1 {
+    font-weight: normal;
+    color: rgb(82, 150, 242);
+}
+
+button {
+    padding: 7px 16px;
+    font-family: 'Open Sans',sans-serif;
+    border-radius: 2px;
+    border: none;
+    background: rgb(82, 150, 242);
+    color: white;
+    position: relative;
+    box-shadow: 0px 2px rgb(64, 86, 144);
+    cursor: pointer;
+    outline: none;
+}
+
+button:hover {
+    background: rgb(117, 170, 242);
+}
+
+button:active {
+    top: 1px;
+    box-shadow: 0 1px rgb(64,86,144);
+}
+
+.error {
+    color: red;
+}
