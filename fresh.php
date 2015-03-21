@@ -8,6 +8,11 @@ class Fresh
 
   }
 
+  function authenticate(){
+
+
+  }
+
 }
 
 ?>
