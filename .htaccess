@@ -27,15 +27,15 @@ AddOutputFilterByType DEFLATE application/x-font-ttf
 AddOutputFilterByType DEFLATE application/x-font-woff
 
 RewriteEngine On
-RewriteCond %{HTTPS} =on
-RewriteRule ^.*$ http://%{SERVER_NAME}%{REQUEST_URI} [R,L]
+# RewriteCond %{HTTPS} =on
+# RewriteRule ^.*$ http://%{SERVER_NAME}%{REQUEST_URI} [R,L]
 
-RewriteCond %{HTTP_HOST} ^www\.
-RewriteRule ^/(.*)$ http://fresh-ideas.eu/$1 [L,R=301]
+# RewriteCond %{HTTP_HOST} ^www\.
+# RewriteRule ^/(.*)$ http://fresh-ideas.eu/$1 [L,R=301]
 
-RewriteRule ^(clients|works|about|contact|category)(.*)$ index.php [NC,L]
+# RewriteRule ^(clients|works|about|contact|category)(.*)$ index.php [NC,L]
 
 # RewriteRule ^(.+)\.(png|css|gif|jpg|js|manifest|zip)$ $1.$2 [NC,L]
 # RewriteRule ^(.+)\.php$ $1.php [NC,L,QSA]
-# RewriteRule $ index.php [NC,L]
+RewriteRule $ index.php [NC,L]
 
