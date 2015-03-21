@@ -28,17 +28,21 @@ $chars = explode(" ",
 
 for($i = 0; $i < 5; $i++) $prefix .= $chars[rand(0,count($chars)-1)];
 
+$salt = mcrypt_create_iv(16,MCRYPT_DEV_URANDOM);
+$hash = hash('sha256',$salt + $variables->CMS_PASSWORD);
+
 // Create core tables
 $dbh->exec("
 
 CREATE TABLE `".$prefix."_cms_users` (
   `id` int not null primary key auto_increment,
   `username` varchar(100),
-  `password` varchar(50),
+  `password` varchar(300),
   `first_name` varchar(50),
   `last_name` varchar(50),
   `email` varchar(100),
-  `image_id` int
+  `image_id` int,
+  `salt` varchar(300)
 );
 
 CREATE TABLE `".$prefix."_cms_variables` (
@@ -46,8 +50,8 @@ CREATE TABLE `".$prefix."_cms_variables` (
   `value` varchar(200)
 );
 
-INSERT INTO `".$prefix."_cms_users` (`username`,`password`) values
-('".$variables->CMS_USERNAME."','".$variables->CMS_PASSWORD."');
+INSERT INTO `".$prefix."_cms_users` (`username`,`password`,`salt`) values
+('".$variables->CMS_USERNAME."','".$hash."','".$salt."');
 
 ");
 
@@ -65,7 +69,8 @@ $config = array(
   "db_host"     => "'.$variables->DB_HOST.'",
   "db_username" => "'.$variables->DB_USERNAME.'",
   "db_password" => "'.$variables->DB_PASSWORD.'",
-  "db_name"     => "'.$variables->DB_NAME.'"
+  "db_name"     => "'.$variables->DB_NAME.'",
+  "prefix"      => "'.$prefix.'"
 );
 
 ?>';
