@@ -1,0 +1,41 @@
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf|ttf|woff)$">
+    Header set Cache-Control "max-age=290304000, public"
+</FilesMatch>
+
+AddType application/javascript js
+AddType image/png png
+AddType image/jpeg jpg
+AddType image/gif gif
+AddType text/cache-manifest manifest
+AddType application/x-font-ttf .ttf
+AddType application/x-font-woff .woff
+
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+AddOutputFilterByType DEFLATE image/png
+AddOutputFilterByType DEFLATE image/jpeg
+AddOutputFilterByType DEFLATE image/gif
+AddOutputFilterByType DEFLATE text/cache-manifest
+AddOutputFilterByType DEFLATE application/x-font-ttf
+AddOutputFilterByType DEFLATE application/x-font-woff
+
+RewriteEngine On
+RewriteCond %{HTTPS} =on
+RewriteRule ^.*$ http://%{SERVER_NAME}%{REQUEST_URI} [R,L]
+
+RewriteCond %{HTTP_HOST} ^www\.
+RewriteRule ^/(.*)$ http://fresh-ideas.eu/$1 [L,R=301]
+
+RewriteRule ^(clients|works|about|contact|category)(.*)$ index.php [NC,L]
+
+# RewriteRule ^(.+)\.(png|css|gif|jpg|js|manifest|zip)$ $1.$2 [NC,L]
+# RewriteRule ^(.+)\.php$ $1.php [NC,L,QSA]
+# RewriteRule $ index.php [NC,L]
+
