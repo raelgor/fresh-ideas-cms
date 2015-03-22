@@ -36,12 +36,12 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
-.log {
+.module_installer.log {
     width: 900px;
     margin: 100px auto;
 }
 
-input {
+.module_installer input {
     display: block;
     background: transparent;
     border: none;
@@ -54,12 +54,12 @@ input {
     outline: none;
 }
 
-h1 {
+.module_installer h1 {
     font-weight: normal;
     color: rgb(82, 150, 242);
 }
 
-button {
+.module_installer button {
     padding: 7px 16px;
     font-family: 'Open Sans',sans-serif;
     border-radius: 2px;
@@ -72,15 +72,15 @@ button {
     outline: none;
 }
 
-button:hover {
+.module_installer button:hover {
     background: rgb(117, 170, 242);
 }
 
-button:active {
+.module_installer button:active {
     top: 1px;
     box-shadow: 0 1px rgb(64,86,144);
 }
 
-.error {
+.module_installer .error {
     color: red;
 }

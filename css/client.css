@@ -8,6 +8,8 @@
   margin: -15px;
   -webkit-animation: rotateplane 1.2s infinite ease-in-out;
   animation: rotateplane 1.2s infinite ease-in-out;
+  -webkit-transition: opacity .5s;
+  transition: opacity .5s;
 }
 
 @-webkit-keyframes rotateplane {
@@ -29,9 +31,116 @@
   }
 }
 
+md-content.md-default-theme {
+  color: black;
+}
+
 body {
     margin: 0;
-    background: #333;
-    color: white;
-    font-family: 'Open Sans', sans-serif;
+    background: #282828 !important;
+    color: white !important;
+}
+
+* {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+}
+
+*:not(input):not(textarea) {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+.animated-view.ng-enter, .animated-view.ng-leave {
+  -webkit-transition:opacity 0.5s;
+  transition:opacity 0.5s;
+
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  display:block;
+}
+
+.animated-view.ng-enter {
+  opacity:0;
+}
+.animated-view.ng-enter.ng-enter-active {
+  opacity:1;
+  transition-delay: .5s;
+  -webkit-transition-delay: .5s;
+}
+
+.animated-view.ng-leave {
+  opacity:1;
+  pointer-events:none;
+}
+.animated-view.ng-leave.ng-leave-active {
+  opacity:0;
+}
+
+.login-dialog {
+  width: 500px;
+  margin: -250px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 500px;
+  text-align: center;
+  background: radial-gradient(rgba(255, 255, 255, 0.12) 0%, rgba(0,0,0,0) 70%);
+  padding: 110px 0 0;
+  box-sizing: border-box;
+  -webkit-transition:opacity .5s;
+  transition:opacity .5s;
+}
+
+.login-dialog input {
+    display: block;
+    width: 280px;
+    margin: auto;
+    border: 1px solid rgb(189, 189, 189);
+    padding: 10px 15px;
+    outline: none;
+}
+
+.login-dialog [ng-model="username"] {
+    border-radius: 4px 4px 0 0;
+    margin-top: 10px !important;
+}
+
+.login-dialog [ng-model="password"] {
+    border-radius: 0 0 4px 4px;
+    border-top: none !important;
+    margin-bottom: 10px !important;
+}
+
+.login-dialog button {
+    padding: 6px 20px;
+    width: 282px;
+    margin: 0px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    text-shadow: 0px 1px white;
+    background: rgb(228, 228, 228);
+    outline: none;
+    position: relative;
+    top: 0px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.login-dialog button:active {
+    top: 1px;
+}
+
+.pending {
+  pointer-events: none;
+  opacity: .2;
+}
+
+.out {
+  opacity: 0;
+  pointer-events: none;
 }

@@ -37,6 +37,6 @@ RewriteEngine On
 
 # RewriteRule ^(.+)\.(png|css|gif|jpg|js|manifest|zip)$ $1.$2 [NC,L]
 # RewriteRule ^(.+)\.php$ $1.php [NC,L,QSA]
-RewriteRule ^(.+)\.(png|css|gif|jpg|js|manifest|zip)$ $1.$2 [NC,L]
+RewriteRule ^(.+)\.(html|png|css|gif|jpg|js|manifest|zip)$ $1.$2 [NC,L]
 RewriteRule $ router.php [NC,L]
 

@@ -13,6 +13,12 @@ class Fresh
 
   }
 
+  function login($username){
+
+
+
+  }
+
 }
 
 ?>

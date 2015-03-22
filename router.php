@@ -25,10 +25,12 @@ if($config) require_once 'config.php';
 // Handle api call
 if($path[count($path)-1] == 'api'){
 
+  $_NGPOST = json_decode(file_get_contents('php://input'),true);
+
   $user = Fresh::authenticate();
 
   // If no module api is referenced, use core api
-  if(!$_REQUEST["api"]){
+  if(!$_NGPOST["api"]){
     include 'api.php';
     exit();
   }
@@ -93,7 +95,7 @@ if($path[count($path)-1] == 'js.min'){
   foreach($scripts as &$filename)
                   array_push($js,file_get_contents('scripts/'.$filename));
 
-  foreach($js as &$u) $u = \JShrink\Minifier::minify($u);
+  //foreach($js as &$u) $u = \JShrink\Minifier::minify($u);
 
   echo implode(' ; ',$js);
 

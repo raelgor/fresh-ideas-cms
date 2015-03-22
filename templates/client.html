@@ -1,23 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="FreshCMS">
   <head>
     <title>Fresh Ideas CMS</title>
+    <base href="http://fresh-ideas.eu/b/fresh-cms/" target="_self" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,400&subset=latin,greek-ext,greek' rel='stylesheet' type='text/css'>
     <link href="css.min" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.8.2/angular-material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.4.7/full/ckeditor.js"></script>
     <script src="ace/ace.js"></script>
     <script src="js.min"></script>
   </head>
   <body>
-    <div class="viewport" ng-controller="FreshCMS"></div>
-    <div class="spinner"></div>
-  <script>
-    var App = new FreshCMS();
-    App.init();
-  </script>
+    <div class="animated-view" ng-view>
+    </div>
+    <div class="spinner out"></div>
   </body>
 </html>
