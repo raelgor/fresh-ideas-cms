@@ -1,11 +1,12 @@
-app.controller('login',['$scope','$route','textData','$http','$mdDialog',
-function($scope,$route,textData,$http,$mdDialog){
+app.controller('login',['$scope','$route','textData','$http','$mdDialog','$location',
+function($scope,$route,textData,$http,$mdDialog,$location){
 
   var text = textData.data;
 
   $('.spinner').addClass('out');
   $scope.textData = text;
   $scope.rememberMe = true;
+  $scope.showTooltip = false;
   $('input[name="username"]').focus();
 
   function showErrorMessage(){
@@ -19,6 +20,10 @@ function($scope,$route,textData,$http,$mdDialog){
 
   $scope.login = function(){
 
+    if(!$scope.username || !$scope.password) return $scope.showTooltip = true;
+
+    $scope.showTooltip = false;
+
     $('.login-dialog').addClass('pending');
     $('.spinner').removeClass('out');
 
@@ -28,10 +33,21 @@ function($scope,$route,textData,$http,$mdDialog){
       password: $scope.password
     }).success(function(response){
 
-      $('.login-dialog').removeClass('pending');
-      $('.spinner').addClass('out');
+      if(response.message != "success"){
 
-      if(!response.success) showErrorMessage();
+        $('.login-dialog').removeClass('pending');
+        $('.spinner').addClass('out');
+        showErrorMessage();
+
+      } else {
+
+        window.session_token = response.session_token;
+        $scope.rememberMe &&
+        localStorage.setItem('session_token',response.session_token);
+
+        $location.url('/');
+
+      }
 
     }).error(function(){
 
@@ -43,5 +59,7 @@ function($scope,$route,textData,$http,$mdDialog){
     });
 
   }
+
+  $('img:not(.loaded)').load(function(){ $(this).addClass('loaded'); });
 
 }]);

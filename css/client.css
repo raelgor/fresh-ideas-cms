@@ -31,8 +31,35 @@
   }
 }
 
+.error-tooltip {
+  color: red !important;
+  width: 333px;
+}
+
+.error-tooltip .md-content.md-show {
+  max-width: 333px !important;
+}
+
+img {
+  transition: opacity .3s;
+  -webkit-transition: opacity .3s;
+  opacity: 0;
+}
+
+img.loaded {
+  opacity: 1;
+}
+
+md-checkbox.md-default-theme:not([disabled]).md-primary.md-checked .md-icon {
+  /* background-color: rgba(22, 146, 208, 1); */
+}
+
 md-content.md-default-theme {
   color: black;
+}
+
+.login-dialog .login-logo {
+  width: 120px;
 }
 
 body {

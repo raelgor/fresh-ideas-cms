@@ -20,40 +20,57 @@ $config = file_get_contents('config.php');
 // Parse request
 $path = explode('/',$_SERVER["REQUEST_URI"]);
 
-if($config) require_once 'config.php';
+if($config){
+
+  require_once 'config.php';
+
+  $host = $config["db_host"];
+  $user = $config["db_username"];
+  $pass = $config["db_password"];
+
+  $db_name = $config["db_name"];
+
+  $dbh = new PDO("mysql:host=$host;dbname=$db_name", $user, $pass);
+  $dbh->exec("SET NAMES utf8");
+  $dbh->exec("SET time_zone = '+2:00'");
+
+}
 
 // Handle api call
 if($path[count($path)-1] == 'api'){
+
+  $response = array("FreshCMS API");
 
   $_NGPOST = json_decode(file_get_contents('php://input'),true);
 
   $user = Fresh::authenticate();
 
   // If no module api is referenced, use core api
-  if(!$_NGPOST["api"]){
+  if(!$_NGPOST["api"] && !$_REQUEST["api"]){
     include 'api.php';
-    exit();
-  }
+  } else {
 
-  // Search and load referenced module api
-  $modules = scandir("modules");
+    // Search and load referenced module api
+    $modules = scandir("modules");
 
-  foreach($modules as &$folder){
+    foreach($modules as &$folder){
 
-    if($folder == "." || $folder == "..") continue;
+      if($folder == "." || $folder == "..") continue;
 
-    $module_files = scandir("modules/".$folder);
-    $search = array_search('api.php',$module_files);
+      $module_files = scandir("modules/".$folder);
+      $search = array_search('api.php',$module_files);
 
-    if(!is_nan($search) && $search != null){
-      include 'modules/' . $folder . '/config.php';
-      if($module_config["api_namespace"] == $_REQUEST["api"]){
-        include 'modules/' . $folder . '/api.php';
+      if(!is_nan($search) && $search != null){
+        include 'modules/' . $folder . '/config.php';
+        if($module_config["api_namespace"] == $_REQUEST["api"]){
+          include 'modules/' . $folder . '/api.php';
+        }
       }
-    }
 
+    }
   }
 
+  echo json_encode($response);
   exit();
 
 }

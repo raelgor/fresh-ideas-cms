@@ -8,7 +8,7 @@ function ($routeProvider,$locationProvider) {
   $routeProvider
     .when('/', {
       controller: 'init',
-      template: ''
+      templateUrl: 'templates/appshell.html'
     })
     .when('/login', {
       controller: 'login',
@@ -26,11 +26,10 @@ function ($routeProvider,$locationProvider) {
 app.controller('init',['$location','$scope',function($location,$scope){
 
   !localStorage.getItem('session_token') &&
+  !window.session_token &&
   $location.url('/login');
 
 }]);
-
-
 
 app.factory('dataFactory',['$http',function($http){
 

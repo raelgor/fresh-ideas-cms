@@ -1,10 +1,10 @@
-<div class="login-dialog">
-  <img src="images/logo."/>
-  <div class="tagline">{{ textData.welcomeTitle }}</div>
+<div class="login-dialog" ng-mousemove="check()">
+  <img class="login-logo" src="images/logo.png"/>
   <form ng-submit="login()">
     <input type="text"     name="username" ng-model="username" placeholder="{{ textData.username }}" />
     <input type="password" name="password" ng-model="password" placeholder="{{ textData.password }}" />
     <md-button type="submit" class="md-raised">{{ textData.submit | uppercase }}</md-button>
     <md-checkbox ng-model="rememberMe" class="md-primary">{{ textData.rememberMe }}</md-checkbox>
+    <div><md-tooltip class="error-tooltip" md-visible="showTooltip">{{ textData.fillFormError }}</md-tooltip></div>
   </form>
 </div>

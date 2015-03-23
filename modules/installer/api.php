@@ -28,8 +28,8 @@ $chars = explode(" ",
 
 for($i = 0; $i < 5; $i++) $prefix .= $chars[rand(0,count($chars)-1)];
 
-$salt = mcrypt_create_iv(16,MCRYPT_DEV_URANDOM);
-$hash = hash('sha256',$salt + $variables->CMS_PASSWORD);
+$salt = uniqid(mt_rand(), true);
+$hash = hash('sha256',$salt . $variables->CMS_PASSWORD);
 
 // Create core tables
 $dbh->exec("
@@ -37,17 +37,24 @@ $dbh->exec("
 CREATE TABLE `".$prefix."_cms_users` (
   `id` int not null primary key auto_increment,
   `username` varchar(100),
-  `password` varchar(300),
+  `password` varchar(300) COLLATE utf8_bin,
   `first_name` varchar(50),
   `last_name` varchar(50),
   `email` varchar(100),
   `image_id` int,
-  `salt` varchar(300)
+  `salt` varchar(300) COLLATE utf8_bin
 );
 
 CREATE TABLE `".$prefix."_cms_variables` (
   `key` varchar(100) primary key,
   `value` varchar(200)
+);
+
+CREATE TABLE `".$prefix."_cms_user_sessions` (
+  `id` int not null primary key auto_increment,
+  `user_id` int,
+  `session_token` varchar(300),
+  `expires` timestamp
 );
 
 INSERT INTO `".$prefix."_cms_users` (`username`,`password`,`salt`) values
