@@ -1,0 +1,16 @@
+<div class="app-shell">
+  <div class="main-menu unborn">
+    <img class="shell-logo" src="images/logo.png"/>
+    <div class="cog-wrapper" ng-click="showSettings($event)">
+      <md-icon md-font-icon="icon-cog" class="icon-cog"></md-icon>
+      <md-tooltip md-visible="tooltipToggle" md-direction="top">{{ shellText.settings }}</md-tooltip> 
+    </div>
+    <div class="logout-wrapper" ng-click="logout($event)">
+      <md-icon md-font-icon="icon-exit" class="icon-exit"></md-icon>
+      <md-tooltip md-visible="tooltipLogoutToggle" md-direction="top">{{ shellText.logout }}</md-tooltip> 
+    </div>
+  </div>
+  <div class="module-view unborn">
+    <div ng-include="view.templateUrl"></div>
+  </div>
+</div>

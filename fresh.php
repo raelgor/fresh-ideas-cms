@@ -8,8 +8,45 @@ class Fresh
 
   }
 
+  function delete($table,$conditions){
+    
+    global $config;
+    global $dbh; 
+    
+    $params = array();
+    $sql = "DELETE FROM `".$config["prefix"]."_".$table."` WHERE ";
+    $str = array();
+    
+    foreach($conditions as $key => $value){
+      
+      array_push($str,"`$key` = :$key");
+      $params[":$key"] = $value; 
+      
+    };
+    
+    $sql .= implode(' AND ',$str); 
+    
+    $query = $dbh->prepare($sql);
+    $query->execute($params); 
+    
+  }
+
   function authenticate(){
 
+    global $config;
+    global $dbh;
+    global $_NGPOST;
+
+    $sql = "SELECT * FROM `".$config["prefix"]."_cms_users` WHERE id = (
+      SELECT user_id FROM `".$config["prefix"]."_cms_user_sessions`
+      WHERE session_token = :session_token
+      AND `expires` > CURRENT_TIMESTAMP
+    )";
+
+    $query = $dbh->prepare($sql);
+    $query->execute(array(":session_token"=>$_NGPOST["session_token"]));
+
+    return $query->fetch(PDO::FETCH_ASSOC);
 
   }
 

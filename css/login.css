@@ -1,0 +1,66 @@
+.login-dialog {
+  width: 500px;
+  margin: -250px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 500px;
+  text-align: center;
+  background: radial-gradient(rgba(255, 255, 255, 0.12) 0%, rgba(0,0,0,0) 70%);
+  padding: 80px 0 0;
+  box-sizing: border-box;
+  -webkit-transition:opacity .5s;
+  transition:opacity .5s;
+}
+
+.login-dialog input {
+    display: block;
+    width: 280px;
+    margin: auto;
+    border: 1px solid rgb(189, 189, 189);
+    padding: 10px 15px;
+    outline: none;
+}
+
+.login-dialog [ng-model="username"] {
+    border-radius: 4px 4px 0 0;
+    margin-top: 10px !important;
+}
+
+.login-dialog [ng-model="password"] {
+    border-radius: 0 0 4px 4px;
+    border-top: none !important;
+    margin-bottom: 10px !important;
+}
+
+.login-dialog button {
+    padding: 6px 20px;
+    width: 282px;
+    margin: 0px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    text-shadow: 0px 1px white;
+    background: rgb(228, 228, 228);
+    outline: none;
+    position: relative;
+    top: 0px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.login-dialog button:active {
+    top: 1px;
+}
+
+.error-tooltip {
+  color: red !important;
+  width: 333px;
+}
+
+.error-tooltip .md-content.md-show {
+  max-width: 333px !important;
+}
+
+.login-dialog md-checkbox {
+  color: white !important;
+}

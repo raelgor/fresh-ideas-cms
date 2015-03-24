@@ -1,0 +1,19 @@
+<div layout="column" flex layout-fill>
+  <md-content class="md-content-settings">
+      <section>
+        <md-subheader class="md-primary">Site info</md-subheader>
+        <md-input-container flex class="settings-basic-input">
+          <label>{{ text.siteName }}</label>
+          <input ng-model="settings.SITE_NAME">
+        </md-input-container>
+        <md-input-container flex class="settings-basic-input">
+          <label>{{ text.siteURL }}</label>
+          <input ng-model="settings.SITE_URL">
+        </md-input-container>
+        <md-checkbox ng-model="settings.HTTPS" aria-label="Lock HTTPS" class="md-primary">{{ text.https }}</md-checkbox>
+    </section>
+  </md-content>
+  <div class="settings-save">
+    <md-button class="md-raised" ng-disabled="{{ generalChanges }}">{{ text.save | uppercase }}</md-button>
+  </div>
+</div>

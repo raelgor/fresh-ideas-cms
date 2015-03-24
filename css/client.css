@@ -1,4 +1,4 @@
-.spinner {
+.spinner { 
   width: 30px;
   height: 30px;
   background-color: #E0E0E0;
@@ -31,15 +31,6 @@
   }
 }
 
-.error-tooltip {
-  color: red !important;
-  width: 333px;
-}
-
-.error-tooltip .md-content.md-show {
-  max-width: 333px !important;
-}
-
 img {
   transition: opacity .3s;
   -webkit-transition: opacity .3s;
@@ -47,7 +38,11 @@ img {
 }
 
 img.loaded {
-  opacity: 1;
+  opacity: 1 !important;
+}
+
+.md-label {
+  top: -1px;
 }
 
 md-checkbox.md-default-theme:not([disabled]).md-primary.md-checked .md-icon {
@@ -62,10 +57,11 @@ md-content.md-default-theme {
   width: 120px;
 }
 
-body {
-    margin: 0;
-    background: #282828 !important;
-    color: white !important;
+body,html {
+  overflow: hidden;
+  margin: 0;
+  background: #282828 !important;
+  color: black !important;
 }
 
 * {
@@ -79,10 +75,13 @@ body {
   -moz-user-select: none;
 }
 
+.animated-view {
+  height: 100%;
+}
+
 .animated-view.ng-enter, .animated-view.ng-leave {
   -webkit-transition:opacity 0.5s;
   transition:opacity 0.5s;
-
   position:absolute;
   top:0;
   left:0;
@@ -108,60 +107,6 @@ body {
   opacity:0;
 }
 
-.login-dialog {
-  width: 500px;
-  margin: -250px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  height: 500px;
-  text-align: center;
-  background: radial-gradient(rgba(255, 255, 255, 0.12) 0%, rgba(0,0,0,0) 70%);
-  padding: 110px 0 0;
-  box-sizing: border-box;
-  -webkit-transition:opacity .5s;
-  transition:opacity .5s;
-}
-
-.login-dialog input {
-    display: block;
-    width: 280px;
-    margin: auto;
-    border: 1px solid rgb(189, 189, 189);
-    padding: 10px 15px;
-    outline: none;
-}
-
-.login-dialog [ng-model="username"] {
-    border-radius: 4px 4px 0 0;
-    margin-top: 10px !important;
-}
-
-.login-dialog [ng-model="password"] {
-    border-radius: 0 0 4px 4px;
-    border-top: none !important;
-    margin-bottom: 10px !important;
-}
-
-.login-dialog button {
-    padding: 6px 20px;
-    width: 282px;
-    margin: 0px;
-    border: 1px solid gray;
-    border-radius: 4px;
-    text-shadow: 0px 1px white;
-    background: rgb(228, 228, 228);
-    outline: none;
-    position: relative;
-    top: 0px;
-    user-select: none;
-    -webkit-user-select: none;
-}
-
-.login-dialog button:active {
-    top: 1px;
-}
-
 .pending {
   pointer-events: none;
   opacity: .2;
@@ -170,4 +115,22 @@ body {
 .out {
   opacity: 0;
   pointer-events: none;
+}
+
+::-webkit-scrollbar {
+ width: 9px;
+ background-color:transparent;
+}
+::-webkit-scrollbar-track {
+ background-color: rgba(175, 175, 175, 0.27);
+}
+
+::-webkit-scrollbar-thumb {
+ background-color:rgba(102, 102, 102, 0.58);
+border-radius: 0px;
+ -webkit-transition-property:all;
+ -webkit-transition-duration:.5s;
+}
+::-webkit-scrollbar-thumb:hover {
+ background-color:rgba(102, 102, 102, 1);
 }

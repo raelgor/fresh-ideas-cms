@@ -1,0 +1,16 @@
+<md-dialog aria-label="Settings" class="settings-dialog">
+  <md-toolbar class="md-default-theme">
+    <h2 class="md-toolbar-tools">
+      <span>{{ text.settings }}</span>
+    </h2>
+  </md-toolbar>
+  <md-tabs md-selected="selectedIndex" flex>
+    <md-tab ng-repeat="tab in tabs"
+            ng-disabled="tab.disabled"
+            label="{{tab.title}}">
+    <div class="demo-tab tab{{$index%4}}" layout="column" layout-align="space-around center">
+        <div ng-include="tab.content" class="settings-include"></div>
+      </div>
+    </md-tab>
+  </md-tabs>
+</md-dialog>

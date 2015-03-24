@@ -42,6 +42,7 @@ CREATE TABLE `".$prefix."_cms_users` (
   `last_name` varchar(50),
   `email` varchar(100),
   `image_id` int,
+  `lang` varchar(10),
   `salt` varchar(300) COLLATE utf8_bin
 );
 

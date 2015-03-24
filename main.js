@@ -1,15 +1,15 @@
 var app = angular.module('FreshCMS',['ngRoute','ngAnimate','ngMaterial']);
 
-app.config(['$routeProvider','$locationProvider',
-function ($routeProvider,$locationProvider) {
+app.config(['$routeProvider','$locationProvider','$mdThemingProvider',
+function ($routeProvider,$locationProvider,$mdThemingProvider) {
+
+  $mdThemingProvider.theme('default')
+    .primaryPalette('blue-grey')
+    .accentPalette('blue');
 
   $locationProvider.html5Mode(true);
 
   $routeProvider
-    .when('/', {
-      controller: 'init',
-      templateUrl: 'templates/appshell.html'
-    })
     .when('/login', {
       controller: 'login',
       templateUrl: 'templates/login.html',
@@ -19,40 +19,44 @@ function ($routeProvider,$locationProvider) {
         }
       }
     })
-    .otherwise({ redirectTo: '/' });
+    .otherwise({
+      controller: 'init',
+      templateUrl: 'templates/appshell.html'
+    });
 
 }]);
 
-app.controller('init',['$location','$scope',function($location,$scope){
-
-  !localStorage.getItem('session_token') &&
-  !window.session_token &&
-  $location.url('/login');
-
-}]);
-
-app.factory('dataFactory',['$http',function($http){
-
-  var factory = {
-
-    getLoginText: function(){
-
-      var promise = $http({
-         method: 'POST',
-         url: 'api',
-         data: { request: 'login-text' }
-      });
-
-      promise.success(function(response){ return response.data; });
-
-      return promise;
-
+app.run(['$location','$rootScope','$route','$templateCache','$http',
+function($location,$rootScope,$route,$templateCache,$http){
+  
+  $(window).click(function(e){
+    
+    if($(e.target).is('.md-dialog-container')){
+      $location.path($rootScope.initialPath);
     }
-
+    
+  });
+  
+  $rootScope.$on('$locationChangeSuccess', function(event,newUrl,oldUrl) {
+    
+    if( $rootScope.initialized && $location.path()!="/login" && !window.ROUTE_FLAG){ 
+      $route.current = $rootScope.initialPath;
+    } 
+    
+    window.ROUTE_FLAG = false; 
+    
+  });
+  
+  function cache(src){
+    $http.get(src).then(function(r){ $templateCache.put(src, r.data); });
   }
+  
+  cache('templates/settings.html');
+  cache('templates/general.html');
+  cache('templates/users.html');
+  cache('templates/modules.html');
+  
+}]);
 
-  return factory;
-
-}])
-
-$(window).bind('touchend',function(e){return false;  })
+// Checkbox touch double trigger bug
+$(window).bind('touchend',function(e){ return false;  });

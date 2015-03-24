@@ -1,5 +1,7 @@
-app.controller('login',['$scope','$route','textData','$http','$mdDialog','$location',
-function($scope,$route,textData,$http,$mdDialog,$location){
+app.controller('login',['$scope','$route','textData','$http','$mdDialog','$location','$rootScope',
+function($scope,$route,textData,$http,$mdDialog,$location,$rootScope){
+
+  if(window.session_token || localStorage.getItem('session_token')) return $location.url('/');
 
   var text = textData.data;
 
@@ -44,8 +46,9 @@ function($scope,$route,textData,$http,$mdDialog,$location){
         window.session_token = response.session_token;
         $scope.rememberMe &&
         localStorage.setItem('session_token',response.session_token);
-
-        $location.url('/');
+        
+        window.ROUTE_FLAG = true;
+        $location.url($rootScope.redirAfterLogin || '/');
 
       }
 

@@ -48,4 +48,29 @@ if($_NGPOST["request"] == "login"){
 
 }
 
+if($_NGPOST["request"] == "auth"){
+
+  $response["message"] = $user ? "valid_token" : "bad_token";
+  $response["lang"] = $user["lang"];
+
+}
+
+if($_NGPOST["request"] == "shell-text"){
+
+  include 'text.php';
+  $response = $text["shell_text"][$_NGPOST["lang"]];
+
+}
+
+if($_NGPOST["request"] == "logout"){
+
+  Fresh::delete('cms_user_sessions',array(
+    "session_token" => $_NGPOST["session_token"],
+    "user_id" => $user["id"] 
+  ));
+  
+  $response["message"] = "success";
+
+}
+
 ?>

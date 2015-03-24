@@ -1,0 +1,67 @@
+.settings-dialog {
+  width: 700px;
+  height: 550px;
+}
+
+.settings-dialog .md-subheader.md-default-theme {
+  color: rgba(255, 255, 255, 1);
+  background-color: rgb(163, 163, 163);
+  margin: 0 !important;
+}
+
+.md-header-items-container {
+  border-bottom: 1px solid #D8D8D8;
+}
+
+.settings-dialog .spinner { 
+  width: 30px;
+  height: 30px;
+  background-color: #8B8B8B;
+  position: fixed;
+  top: 320px;
+  left: 50%;
+  margin: -15px;
+  -webkit-animation: rotateplane 1.2s infinite ease-in-out;
+  animation: rotateplane 1.2s infinite ease-in-out;
+  -webkit-transition: opacity .5s;
+  transition: opacity .5s;
+}
+
+.settings-dialog .settings-include.ng-enter {
+  opacity: 0;
+  transition: opacity ease .5s .5s;
+  -webkit-transition: opacity ease .5s .5s;
+}
+
+.settings-dialog .settings-include.ng-enter.ng-enter-active { 
+  opacity: 1;
+}
+
+.settings-dialog .settings-include.ng-scope {
+    width: 100%;
+    display: block;
+    overflow: auto;
+    height: 430px;
+}
+
+.settings-dialog .md-content-settings {
+  height: 390px;
+  padding: 0px;
+  overflow-x: hidden;
+}
+
+.settings-dialog .md-placeholder {
+  opacity: 0;
+}
+
+.settings-dialog md-input-container.settings-basic-input.md-default-theme {
+    margin: 13px 0 0 13px;
+    width: 50%;
+    padding-bottom: 3px;
+}
+
+.settings-dialog .settings-save {
+  order: 1;
+  text-align: right;
+  margin-right: 18px;
+}
