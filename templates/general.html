@@ -1,19 +1,19 @@
-<div layout="column" flex layout-fill>
+<div layout="column" flex layout-fill ng-controller="generalCtrl">
   <md-content class="md-content-settings">
       <section>
-        <md-subheader class="md-primary">Site info</md-subheader>
+        <md-subheader class="md-primary settings-general-divider">{{ text.siteInfo }}</md-subheader>
         <md-input-container flex class="settings-basic-input">
           <label>{{ text.siteName }}</label>
-          <input ng-model="settings.SITE_NAME">
+          <input ng-model="settings[1].value" ng-change="enableSave()">
         </md-input-container>
         <md-input-container flex class="settings-basic-input">
           <label>{{ text.siteURL }}</label>
-          <input ng-model="settings.SITE_URL">
+          <input ng-model="settings[2].value" ng-change="enableSave()">
         </md-input-container>
-        <md-checkbox ng-model="settings.HTTPS" aria-label="Lock HTTPS" class="md-primary">{{ text.https }}</md-checkbox>
+        <md-checkbox ng-model="settings[0].value" aria-label="Lock HTTPS" class="md-primary" ng-change="enableSave()">{{ text.https }}</md-checkbox> 
     </section>
   </md-content>
   <div class="settings-save">
-    <md-button class="md-raised" ng-disabled="{{ generalChanges }}">{{ text.save | uppercase }}</md-button>
+    <md-button class="md-raised" ng-disabled="!generalChanges" ng-click="saveChanges()">{{ text.save | uppercase }}</md-button>
   </div>
 </div>

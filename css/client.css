@@ -64,6 +64,19 @@ body,html {
   color: black !important;
 }
 
+.iron {
+  pointer-events: none;
+}
+
+.dark {
+  opacity: .5;
+}
+
+html {
+  transition: opacity ease .3s;
+  -webkit-transition: opacity ease .3s;
+}
+
 * {
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;

@@ -54,8 +54,9 @@
   opacity: 0;
 }
 
-.settings-dialog md-input-container.settings-basic-input.md-default-theme {
-    margin: 13px 0 0 13px;
+.settings-dialog md-input-container.settings-basic-input.md-default-theme,
+.settings-dialog md-checkbox {
+    margin: 13px 0 0 55px;
     width: 50%;
     padding-bottom: 3px;
 }
@@ -64,4 +65,13 @@
   order: 1;
   text-align: right;
   margin-right: 18px;
+}
+
+.settings-dialog .settings-general-divider span {
+  margin-left: 10px;
+}
+
+[ng-controller="generalCtrl"] {
+  transition: opacity ease .3s;
+  -webkit-transition: opacity ease .3s;
 }

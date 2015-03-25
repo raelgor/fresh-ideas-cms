@@ -36,7 +36,10 @@ $text = array(
       "siteNameDesc"   => "The full name of the website or business",
       "siteURLDesc"    => "E.g. https://site.com",
       "https"          => "Lock HTTPS",
-      "save"           => "Save changes"
+      "save"           => "Save changes",
+      "siteInfo"       => "Site info",
+      "savedSuccess"   => "Changes saved!",
+      "ok"             => "Ok"
 
     )
 

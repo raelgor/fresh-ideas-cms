@@ -56,6 +56,24 @@ app.factory('dataFactory',['$http',function($http){
 
       return promise;
       
+    },
+    
+    saveGeneralSettings: function(settings){
+      
+      var promise = $http({
+         method: 'POST',
+         url: 'api',
+         data: { 
+          request: 'save-general-settings', 
+          session_token: window.session_token, 
+          settings: settings
+         }
+      });
+
+      promise.success(function(response){ return response.data; });
+
+      return promise;
+      
     }
 
   };

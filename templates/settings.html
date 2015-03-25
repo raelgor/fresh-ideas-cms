@@ -4,12 +4,13 @@
       <span>{{ text.settings }}</span>
     </h2>
   </md-toolbar>
-  <md-tabs md-selected="selectedIndex" flex>
+  <md-tabs md-selected="selectedIndex" flex style="overflow:hidden">
     <md-tab ng-repeat="tab in tabs"
             ng-disabled="tab.disabled"
             label="{{tab.title}}">
     <div class="demo-tab tab{{$index%4}}" layout="column" layout-align="space-around center">
         <div ng-include="tab.content" class="settings-include"></div>
+        <div class="spinner"></div>
       </div>
     </md-tab>
   </md-tabs>

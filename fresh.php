@@ -3,8 +3,38 @@
 class Fresh
 {
 
-  function update($table,$array,$key){
-
+  function update($table,$data,$keys){
+    
+    global $config;
+    global $dbh;
+    
+    $sql = "UPDATE `".$config["prefix"]."_$table` SET ";
+    $params = array();
+    $data_array = array();
+    $keys_array = array();
+    
+    foreach($data as $key => $value){
+      
+      array_push($data_array,"`$key` = :$key");
+      $params[":$key"] = $value;
+      
+    }
+    
+    $sql .= implode(" , ",$data_array) . " WHERE ";
+    
+    foreach($keys as $key => $value){
+      
+      array_push($keys_array,"`$key` = :$key");
+      $params[":$key"] = $value;
+      
+    }
+    
+    $sql .= implode(" AND ",$keys_array);
+    
+    $query = $dbh->prepare($sql);
+    $query->execute($params);
+    
+    return true;
 
   }
 
@@ -28,6 +58,8 @@ class Fresh
     
     $query = $dbh->prepare($sql);
     $query->execute($params); 
+    
+    return true;
     
   }
 

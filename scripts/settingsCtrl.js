@@ -12,11 +12,5 @@ function($scope,$mdDialog,$rootScope,$templateCache){
   ];
 
   $scope.tabs = tabs;
-  $scope.settings = {
-    SITE_NAME: 'fi',
-    SITE_URL: 'fi.eu'
-  };
-  
-  $scope.generalChanges = true;
 
 }]);

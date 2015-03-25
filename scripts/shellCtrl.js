@@ -68,6 +68,7 @@ function($location,$scope,dataFactory,$mdDialog,$rootScope,$templateCache,$http,
     if(response.data.message == "valid_token"){
 
       window.session_lang = response.data.lang;
+      $rootScope.settings = response.data.settings;
       dataFactory.getShellText().then(init);
 
     } else {

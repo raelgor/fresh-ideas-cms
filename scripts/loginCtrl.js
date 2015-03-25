@@ -5,7 +5,7 @@ function($scope,$route,textData,$http,$mdDialog,$location,$rootScope){
 
   var text = textData.data;
 
-  $('.spinner').addClass('out');
+  $('body > .spinner').addClass('out');
   $scope.textData = text;
   $scope.rememberMe = true;
   $scope.showTooltip = false;
@@ -27,7 +27,7 @@ function($scope,$route,textData,$http,$mdDialog,$location,$rootScope){
     $scope.showTooltip = false;
 
     $('.login-dialog').addClass('pending');
-    $('.spinner').removeClass('out');
+    $('body > .spinner').removeClass('out');
 
     $http.post('api',{
       request: 'login',
@@ -38,7 +38,7 @@ function($scope,$route,textData,$http,$mdDialog,$location,$rootScope){
       if(response.message != "success"){
 
         $('.login-dialog').removeClass('pending');
-        $('.spinner').addClass('out');
+        $('body > .spinner').addClass('out');
         showErrorMessage();
 
       } else {
@@ -55,7 +55,7 @@ function($scope,$route,textData,$http,$mdDialog,$location,$rootScope){
     }).error(function(){
 
       $('.login-dialog').addClass('pending');
-      $('.spinner').removeClass('out');
+      $('body > .spinner').removeClass('out');
 
       showErrorMessage();
 

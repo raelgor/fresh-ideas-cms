@@ -52,6 +52,7 @@ if($_NGPOST["request"] == "auth"){
 
   $response["message"] = $user ? "valid_token" : "bad_token";
   $response["lang"] = $user["lang"];
+  $response["settings"] = Fresh::fetch('cms_variables',false);
 
 }
 
@@ -71,6 +72,20 @@ if($_NGPOST["request"] == "logout"){
   
   $response["message"] = "success";
 
+}
+
+if($_NGPOST["request"] == "save-general-settings"){
+  
+  if($user){
+    $settings = $_NGPOST["settings"];
+    foreach($settings as $var){
+      Fresh::update('cms_variables',$var,array("key"=>$var["key"]));
+    }
+    $response["message"] = "success";
+  } else {
+    $response["message"] = "bad_token";
+  }
+  
 }
 
 ?>
