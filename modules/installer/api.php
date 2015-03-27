@@ -43,6 +43,7 @@ CREATE TABLE `".$prefix."_cms_users` (
   `email` varchar(100),
   `image_id` int,
   `lang` varchar(10),
+  `level` int,
   `salt` varchar(300) COLLATE utf8_bin
 );
 
@@ -58,8 +59,19 @@ CREATE TABLE `".$prefix."_cms_user_sessions` (
   `expires` timestamp
 );
 
+CREATE TABLE `".$prefix."_cms_user_levels` (
+	`id` int primary key not null auto_increment
+);
+
+INSERT INTO `".$prefix."_cms_user_levels` (id) values (1),(2),(3);
+
 INSERT INTO `".$prefix."_cms_users` (`username`,`password`,`salt`) values
 ('".$variables->CMS_USERNAME."','".$hash."','".$salt."');
+
+INSERT INTO `".$prefix."_cms_variables` (`key`,`value`) values
+('HTTPS','0'),
+('SITE_NAME',''),
+('SITE_URL','');
 
 ");
 

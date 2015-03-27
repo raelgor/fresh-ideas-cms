@@ -88,4 +88,21 @@ if($_NGPOST["request"] == "save-general-settings"){
   
 }
 
+if($_NGPOST["request"] == "cms-users"){
+  
+  if($user){
+    $response["users"] = Fresh::fetch('cms_users',array(
+      "first_name",
+      "last_name",
+      "email",
+      "username",
+      "image_id"
+    ));
+    $response["message"] = "success";
+  } else {
+    $response["message"] = "bad_token";
+  }
+  
+}
+
 ?>

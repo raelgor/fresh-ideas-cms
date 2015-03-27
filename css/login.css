@@ -11,6 +11,7 @@
   box-sizing: border-box;
   -webkit-transition:opacity .5s;
   transition:opacity .5s;
+  opacity: 0;
 }
 
 .login-dialog input {

@@ -2,7 +2,8 @@ app.controller('login',['$scope','$route','textData','$http','$mdDialog','$locat
 function($scope,$route,textData,$http,$mdDialog,$location,$rootScope){
 
   if(window.session_token || localStorage.getItem('session_token')) return $location.url('/');
-
+  
+  $('.login-dialog').css('opacity','1');
   var text = textData.data;
 
   $('body > .spinner').addClass('out');

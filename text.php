@@ -39,7 +39,13 @@ $text = array(
       "save"           => "Save changes",
       "siteInfo"       => "Site info",
       "savedSuccess"   => "Changes saved!",
-      "ok"             => "Ok"
+      "ok"             => "Ok",
+      "name"           => "Name",
+      "username"       => "Username",
+      "email"          => "Email",
+      "level1"         => "Admin",
+      "level2"         => "Moderator",
+      "level3"         => "Editor"
 
     )
 

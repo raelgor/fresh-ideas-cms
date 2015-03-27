@@ -14,7 +14,7 @@ function($location,$scope,dataFactory,$mdDialog,$rootScope,$templateCache,$http,
     $('.spinner').addClass('out');
     $('.main-menu,.module-view').removeClass('unborn');
     
-    if(path[0] == "settings") $timeout(function(){ $scope.showSettings(); },0);
+    $rootScope.customRoute(path,path,true);
     
   }
   
@@ -33,7 +33,7 @@ function($location,$scope,dataFactory,$mdDialog,$rootScope,$templateCache,$http,
       
     $mdDialog.show(confirm).then(function(){
       
-      dataFactory.logout();
+      setTimeout(dataFactory.logout,0);
       session_token = undefined;
       localStorage.removeItem('session_token');
       $location.url('/login');
@@ -42,7 +42,7 @@ function($location,$scope,dataFactory,$mdDialog,$rootScope,$templateCache,$http,
     
   }
 
-  $scope.showSettings = function(ev) {
+  $rootScope.showSettings = function(ev) {
     $rootScope.locationBeforeSettings = $location.url();
     ev && (window.NO_ROUTE = true) && $location.path("/settings");
     
@@ -52,7 +52,12 @@ function($location,$scope,dataFactory,$mdDialog,$rootScope,$templateCache,$http,
       template: $templateCache.get('templates/settings.html'),
       targetEvent: ev || undefined,
     });
+    
+    return true;
+    
   };
+
+  $scope.showSettings = $rootScope.showSettings;
 
   window.session_token = window.session_token ||
                          localStorage.getItem('session_token');

@@ -1,0 +1,10 @@
+<div class="smart-list">
+  <div class="fields">
+    <div class="field-name" ng-repeat="fieldName in listFields">{{ fieldName }}</div>
+  </div>
+  <div class="data-pool">
+    <div class="entry" ng-repeat="(index, entry) in fieldData">
+      <div ng-repeat="(key,val) in fieldData[index]"><input ng-model="fieldData[index][key]" type="text" /></div>
+    </div>
+  </div>
+</div>
