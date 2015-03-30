@@ -82,10 +82,13 @@ class Fresh
 
   }
 
-  function fetch($table,$fields,$filters){
+  function fetch($table,$fields,$filters,$from,$toFetch){
 
     global $config;
     global $dbh;
+    
+    $from    = $from    ? $from    : 0;
+    $toFetch = $toFetch ? $toFetch : 50; 
 
     $query = 'SELECT ';
     $params = array();
@@ -115,6 +118,8 @@ class Fresh
       $query .= implode(' AND ',$filter_string);
 
     }
+
+    $sql .= "LIMIT $from,$toFetch;";
 
     $query_obj = $dbh->prepare($query);
 

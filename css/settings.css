@@ -75,3 +75,168 @@
   transition: opacity ease .3s;
   -webkit-transition: opacity ease .3s;
 }
+
+.smart-list {
+  height: 430px;
+  overflow: auto;
+  padding: 0px;
+  overflow-x: hidden;
+}
+
+.fields {
+    margin: 20px 20px 0;
+    padding: 0 0 3px;
+    border-bottom: 1px solid rgb(219, 219, 219);
+    font-weight: bold;
+}
+
+.field-name {
+  font-size: 12px;
+  padding: 0 46px 0 6px;
+}
+
+.data-pool {
+  height: 330px;
+  overflow: auto;
+}
+
+.entry {
+    height: 29px;
+    margin: 0 20px;
+}
+
+.entry:nth-child(even) {
+    background: rgb(247, 247, 247);
+}
+
+.entry > div {
+  display: inline-block;
+  vertical-align: top;
+  width: 100px;
+  margin: 6px;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 11px;
+}
+
+.basic-input {
+  margin: 0px;
+  width: 100px;
+  padding-bottom: 3px;
+}
+
+md-select {  
+  margin: 3px 0 0 0 !important;
+}
+
+.smart-list md-checkbox {
+  width: 14px;
+  height: 14px;
+  margin: 3px 11px;
+  display: inline-block;
+  font-size: 5px !important;
+}
+
+.smart-list md-checkbox .md-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.smart-list md-checkbox .md-container {
+  height: 16px !important;
+}
+
+.smart-list md-checkbox.md-checked .md-icon:after {
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  display: table;
+  width: 4px;
+  height: 10px;
+  border: 2px solid;
+  border-top: 0;
+  border-left: 0;
+  content: ' ';
+}
+
+.option-icon {
+    float: right;
+    width: 20px !important;
+    margin: 5px 7px 0 0 !important;
+    opacity: .2;
+    cursor: pointer;
+    padding: 4px;
+    text-align: center;
+}
+
+.entry:hover .option-icon {
+    opacity: .5;
+}
+
+.option-icon:hover {
+    opacity: .6 !important;
+    background: #D5CCCC;
+    border-radius: 3px;
+}
+
+.button-line {
+    padding: 15px 0 0 22px;
+}
+
+.slide-animate {
+  height: 430px;
+}
+
+.slide-animate.ng-enter, .slide-animate.ng-leave {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  display:block;
+}
+
+.slide-animate.ng-enter {
+  top:-430px;
+}
+.slide-animate.ng-enter.ng-enter-active {
+  top:0;
+}
+
+.slide-animate.ng-leave {
+  top:0;
+}
+.slide-animate.ng-leave.ng-leave-active {
+  top:430px;
+  opacity: 0;
+}
+
+.edit-user {
+height: 430px;
+  background: white;
+}
+
+.edit-user md-input-container {
+  width: 310px !important;
+}
+
+.edit-user md-select {
+    float: right;
+}
+
+.edit-user md-select {
+  float: right;
+  display: block;
+  width: 160px;
+  margin: 19px 110px !important;
+  position: relative;
+  top: 17px;
+}
+
+.edit-user md-select .md-placeholder {
+  opacity: 1 !important;
+}

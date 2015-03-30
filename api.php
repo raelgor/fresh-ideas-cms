@@ -53,6 +53,7 @@ if($_NGPOST["request"] == "auth"){
   $response["message"] = $user ? "valid_token" : "bad_token";
   $response["lang"] = $user["lang"];
   $response["settings"] = Fresh::fetch('cms_variables',false);
+  $response["userLevels"] = Fresh::fetch('cms_user_levels',false); 
 
 }
 
@@ -92,12 +93,14 @@ if($_NGPOST["request"] == "cms-users"){
   
   if($user){
     $response["users"] = Fresh::fetch('cms_users',array(
+      "username",
       "first_name",
       "last_name",
       "email",
-      "username",
-      "image_id"
-    ));
+      "image_id",
+      "lang",
+      "level" 
+    ),$_NGPOST["from"]);
     $response["message"] = "success";
   } else {
     $response["message"] = "bad_token";

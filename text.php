@@ -36,16 +36,24 @@ $text = array(
       "siteNameDesc"   => "The full name of the website or business",
       "siteURLDesc"    => "E.g. https://site.com",
       "https"          => "Lock HTTPS",
-      "save"           => "Save changes",
+      "saveChanges"    => "Save changes",
       "siteInfo"       => "Site info",
       "savedSuccess"   => "Changes saved!",
       "ok"             => "Ok",
-      "name"           => "Name",
+      "fullName"       => "Full name",
+      "firstName"      => "First name",
+      "lastName"       => "Last name",
       "username"       => "Username",
       "email"          => "Email",
       "level1"         => "Admin",
       "level2"         => "Moderator",
-      "level3"         => "Editor"
+      "level3"         => "Editor",
+      "lang"           => "Language",
+      "role"           => "Role",
+      "newUser"        => "New user",
+      "delete"         => "Delete",
+      "save"           => "Save",
+      "newPassword"    => "New password (leave blank to keep same)"
 
     )
 

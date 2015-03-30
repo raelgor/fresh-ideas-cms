@@ -71,6 +71,7 @@ function($location,$rootScope,$route,$templateCache,$http,$timeout){
   cache('templates/users.html');
   cache('templates/modules.html');
   cache('templates/list.html');
+  cache('templates/edituser.html');
   
   $rootScope.customRoute = function(newPath,oldPath,justLoaded){
     

@@ -1,0 +1,41 @@
+<div class="edit-user">
+  <div class="button-line">
+    <md-button class="md-raised" ng-click="back()" aria-label="Back"><span class="icon-undo2"></span></md-button>
+    <md-button class="md-raised md-primary" ng-disabled="!v.changes" aria-label="Save" ng-click="saveUser()">{{ text.save }}</md-button>
+  </div>
+  
+  <md-select placeholder="{{ text.role }}" ng-model="v.targetedUser.level" ng-change="v.changes = true">
+    <md-option ng-repeat="(i,v) in userLevels" value="{{v.id}}">{{ text['level'+v.id] }}</md-option>
+  </md-select>
+  
+  <md-select placeholder="{{ text.lang }}" ng-model="v.targetedUser.lang" ng-change="v.changes = true">
+    <md-option value="en">English</md-option>
+    <md-option value="gr">Ελληνικά</md-option>
+  </md-select>
+    
+  <md-input-container flex class="settings-basic-input">
+    <label>{{ text.firstName }}</label>
+    <input ng-model="v.targetedUser.first_name" ng-change="v.changes = true"> 
+  </md-input-container>
+  
+  <md-input-container flex class="settings-basic-input">
+    <label>{{ text.lastName }}</label>
+    <input ng-model="v.targetedUser.last_name" ng-change="v.changes = true">
+  </md-input-container>
+  
+  <md-input-container flex class="settings-basic-input">
+    <label>{{ text.username }}</label>
+    <input ng-model="v.targetedUser.username" ng-change="v.changes = true">
+  </md-input-container>
+  
+  <md-input-container flex class="settings-basic-input">
+    <label>{{ text.email }}</label>
+    <input ng-model="v.targetedUser.email" ng-change="v.changes = true">
+  </md-input-container>
+  
+  <md-input-container flex class="settings-basic-input">
+    <label>{{ text.newPassword }}</label>
+    <input ng-model="v.targetedUser.password" ng-change="v.changes = true">
+  </md-input-container>
+        
+</div>

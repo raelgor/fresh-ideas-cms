@@ -74,6 +74,7 @@ function($location,$scope,dataFactory,$mdDialog,$rootScope,$templateCache,$http,
 
       window.session_lang = response.data.lang;
       $rootScope.settings = response.data.settings;
+      $rootScope.userLevels = response.data.userLevels;
       dataFactory.getShellText().then(init);
 
     } else {
