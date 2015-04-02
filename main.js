@@ -47,13 +47,13 @@ function($location,$rootScope,$route,$templateCache,$http,$timeout){
     newPathStr = newUrl.split(base)[1];
     oldPathStr = oldUrl.split(base)[1];
     
-    newPathStr.split('/').forEach(function(l){ l && newPath.push(l); });
-    oldPathStr.split('/').forEach(function(l){ l && oldPath.push(l); });
+    newPathStr.split('/').forEach(function(l){ if(l) newPath.push(l); });
+    oldPathStr.split('/').forEach(function(l){ if(l) oldPath.push(l); });
     
     if( $rootScope.initialized && ($location.path()!="/login" || window.session_token) && !window.ROUTE_FLAG){
       
       $route.current = $rootScope.initialPath; 
-      !window.NO_ROUTE && $rootScope.customRoute(newPath,oldPath);
+      if(!window.NO_ROUTE) $rootScope.customRoute(newPath,oldPath);
       
     } 
     
@@ -92,11 +92,11 @@ function($location,$rootScope,$route,$templateCache,$http,$timeout){
     }
     
     if(!justLoaded){ 
-      oldPath[0] == "settings" && newPath[0] != "settings" && $rootScope.hideSettings(); 
-      oldPath[0] != "settings" && newPath[0] == "settings" && $rootScope.showSettings();
+      if(oldPath[0] == "settings" && newPath[0] != "settings") $rootScope.hideSettings(); 
+      if(oldPath[0] != "settings" && newPath[0] == "settings") $rootScope.showSettings();
     } 
     
-  }
+  };
   
 }]);
 

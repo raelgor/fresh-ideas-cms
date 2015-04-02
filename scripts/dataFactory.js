@@ -10,7 +10,7 @@ app.factory('dataFactory',['$http',function($http){
          data: { request: 'login-text' }
       });
 
-      promise.success(function(response){ return response.data; });
+      promise.success(function(response){ return response; });
 
       return promise;
 

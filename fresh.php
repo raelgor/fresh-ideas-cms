@@ -1,8 +1,24 @@
 <?php
+/*
+** Fresh Framework 0.1.0
+** Copyright (c) 2015 Kosmas Papadatos
+** Licence: MIT
+**
+** A tiny PHP-MySQL-Auth framework for small jobs.
+**
+** WARNING: This code is part of a project and does not work independently. The
+** Fresh class expects a $dbh variable with a PDO connection to a MySQL 
+** database as well as a $config array with settings.
+*/
 
 class Fresh
 {
-
+  
+  public static $API_HANDLERS = array(); 
+  public static $API_RESPONSE = array("api_version"=>"0.1.0");
+  
+  // Update data in table with or without keys
+  // TODO: Add custom SQL option
   function update($table,$data,$keys){
     
     global $config;
@@ -37,7 +53,9 @@ class Fresh
     return true;
 
   }
-
+  
+  // Delete data from table with keys
+  // TODO: Add safety and custom SQL option
   function delete($table,$conditions){
     
     global $config;
@@ -63,6 +81,7 @@ class Fresh
     
   }
 
+  // Authenticates a session token
   function authenticate(){
 
     global $config;
@@ -74,7 +93,7 @@ class Fresh
       WHERE session_token = :session_token
       AND `expires` > CURRENT_TIMESTAMP
     )";
-
+    
     $query = $dbh->prepare($sql);
     $query->execute(array(":session_token"=>$_NGPOST["session_token"]));
 
@@ -82,6 +101,8 @@ class Fresh
 
   }
 
+  // Makes a select call and returns data from table
+  // TODO: Custon SQL option in filters and fields
   function fetch($table,$fields,$filters,$from,$toFetch){
 
     global $config;
@@ -128,7 +149,8 @@ class Fresh
     return $query_obj->fetchall(PDO::FETCH_ASSOC);
 
   }
-
+  
+  // Inserts data in table from array
   function insert($table,$data){
 
     global $config;
@@ -165,6 +187,60 @@ class Fresh
 
     return true;
 
+  }
+  
+  // Registers a new API call handler
+  function api($api,$options,$handler){ 
+    
+    $API_HANDLERS =& static::$API_HANDLERS;
+    $options      = $options ? $options : array();
+    
+    $API_HANDLERS[$api] = $API_HANDLERS[$api] ? $API_HANDLERS[$api] : array();
+    
+    $options["handler"]  = $handler;
+    
+    if(!$options["request"]){ 
+      
+      $options["requests"] = array();
+      $API_HANDLERS[$api] = $options;
+    
+    }
+    else $API_HANDLERS[$api]["requests"][$options["request"]] = $options;
+    
+  }
+  
+  // Handles an API call or returns an error JSON if no handler has been 
+  // assigned
+  function handle($post_request){ 
+    
+    global $user;
+    
+    $API_HANDLERS =& static::$API_HANDLERS;
+    
+    $api      = $post_request["api"] ? 
+                $post_request["api"] : $post_request["request"];
+    $request  = $post_request["api"] && $post_request["request"] ? 
+                $post_request["request"] : false;
+    $response =& static::$API_RESPONSE;
+    
+    $API = $api && $request ? 
+      $API_HANDLERS[$api]["requests"][$request]
+      : $api ? $API_HANDLERS[$api]
+      : false;
+      
+    if($API){
+      
+      if(!$API["auth"] || ($API["auth"] && $user)){ 
+        if(!$API["level"] || ($API["level"] >= intval($user["level"]))) $API["handler"]($post_request,&$response);
+        else $response["message"] = "api_access_denied";
+      } else $response["message"] = "bad_token";
+      
+      echo json_encode($response);
+      
+    } else {
+      $response["message"] = "invalid_api_call";
+    }
+    
   }
 
 }

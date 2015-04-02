@@ -3,14 +3,14 @@ function($location,$scope,dataFactory,$mdDialog,$rootScope,$templateCache,$http,
   
   var path = [];
   
-  $location.$$path.split('/').forEach(function(l){ l && path.push(l); });
+  $location.$$path.split('/').forEach(function(l){ if(l) path.push(l); });
   
   $rootScope.initialized = 1;
   $rootScope.initialPath = path[0] == "settings" ? '/' : $location.path();  
   
   function init(response){
     
-    $scope.shellText = $rootScope.shellText = response.data;
+    $scope.shellText = $rootScope.shellText = response.data.text;
     $('.spinner').addClass('out');
     $('.main-menu,.module-view').removeClass('unborn');
     
@@ -40,11 +40,11 @@ function($location,$scope,dataFactory,$mdDialog,$rootScope,$templateCache,$http,
       
     });
     
-  }
+  };
 
   $rootScope.showSettings = function(ev) {
     $rootScope.locationBeforeSettings = $location.url();
-    ev && (window.NO_ROUTE = true) && $location.path("/settings");
+    if(ev && (window.NO_ROUTE = true)) $location.path("/settings");
     
     $scope.tooltipToggle = false;
     $mdDialog.show({
@@ -54,7 +54,7 @@ function($location,$scope,dataFactory,$mdDialog,$rootScope,$templateCache,$http,
     });
     
     return true;
-    
+     
   };
 
   $scope.showSettings = $rootScope.showSettings;
@@ -70,7 +70,7 @@ function($location,$scope,dataFactory,$mdDialog,$rootScope,$templateCache,$http,
 
   dataFactory.auth().then(function(response){
 
-    if(response.data.message == "valid_token"){
+    if(response.data.message == "success"){
 
       window.session_lang = response.data.lang;
       $rootScope.settings = response.data.settings;

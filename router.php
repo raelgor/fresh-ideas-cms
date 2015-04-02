@@ -39,12 +39,10 @@ if($config){
 // Handle api call
 if($path[count($path)-1] == 'api'){
 
-  $response = array("FreshCMS API");
-
   $_NGPOST = json_decode(file_get_contents('php://input'),true);
 
   $user = Fresh::authenticate();
-
+  
   // If no module api is referenced, use core api
   if(!$_NGPOST["api"] && !$_REQUEST["api"]){
     include 'api.php';
@@ -68,11 +66,12 @@ if($path[count($path)-1] == 'api'){
       }
 
     }
+
   }
 
-  echo json_encode($response);
+  Fresh::handle($_NGPOST);
   exit();
-
+  
 }
 
 // If we don't have a configuration file, run installer

@@ -4,7 +4,7 @@ function($scope,$route,textData,$http,$mdDialog,$location,$rootScope){
   if(window.session_token || localStorage.getItem('session_token')) return $location.url('/');
   
   $('.login-dialog').css('opacity','1');
-  var text = textData.data;
+  var text = textData.data.text;
 
   $('body > .spinner').addClass('out');
   $scope.textData = text;
