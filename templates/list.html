@@ -1,7 +1,7 @@
 <div class="smart-list">
   <div class="button-line">
     <md-button class="md-raised md-primary" ng-click="editUser()">{{ text.newUser }}</md-button>
-    <md-button ng-disabled="selectionCount()" class="md-raised">{{ text.delete }}</md-button>
+    <md-button ng-disabled="selectionCount()" ng-click="massDelete()" class="md-raised">{{ text.delete }}</md-button>
   </div>
   <div class="fields">
     <md-checkbox ng-change="selectAllChange()" ng-model="v.selectAll" aria-label="Remember me" class="md-primary"></md-checkbox> 
@@ -13,11 +13,11 @@
   <div class="data-pool">
     <div class="entry" ng-repeat="(index, entry) in fieldData">
       <md-checkbox ng-change="selectionChange()" ng-model="fieldData[index]._selected" aria-label="Select" class="md-primary"></md-checkbox>
-      <div>{{ fieldData[index].first_name + ' ' + fieldData[index].last_name }}</div>
+      <div>{{ (fieldData[index].first_name || '') + ' ' + (fieldData[index].last_name || '') }}</div>
       <div>{{ fieldData[index].username }}</div>
       <div style="width:165px;">{{ fieldData[index].email }}</div>
       <div>{{ text['level'+fieldData[index].level] }}</div>
-      <div class="option-icon icon-cross" ng-click=""></div>
+      <div class="option-icon icon-cross" ng-click="deleteUser(index)"></div>
       <div class="option-icon icon-pencil" ng-click="editUser(index)"></div>
     </div>
   </div>

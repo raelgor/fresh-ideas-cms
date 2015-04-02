@@ -1,4 +1,4 @@
-var app = angular.module('FreshCMS',['ngRoute','ngAnimate','ngMaterial']);
+var app = angular.module('FreshCMS',['ngRoute','ngAnimate','ngMaterial']); 
 
 app.config(['$routeProvider','$locationProvider','$mdThemingProvider',
 function ($routeProvider,$locationProvider,$mdThemingProvider) {
@@ -27,7 +27,7 @@ function ($routeProvider,$locationProvider,$mdThemingProvider) {
 }]);
 
 app.run(['$location','$rootScope','$route','$templateCache','$http','$timeout',
-function($location,$rootScope,$route,$templateCache,$http,$timeout){
+function($location,$rootScope,$route,$templateCache,$http,$timeout){ 
   
   $(window).click(function(e){
     

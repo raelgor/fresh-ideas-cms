@@ -240,3 +240,49 @@ height: 430px;
 .edit-user md-select .md-placeholder {
   opacity: 1 !important;
 }
+
+.settings-confirm-dialog.visible {
+    opacity: 1 !important;
+    pointer-events: all;
+}
+
+.settings-confirm-dialog {
+    opacity: 0;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.58);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    transition: opacity ease .2s;
+    -webkit-transition: opacity ease .2s;
+}
+
+.settings-confirm-dialog .dialog-window {
+    background: white;
+    width: 50%;
+    top: 50%;
+    position: absolute;
+    margin: auto;
+    box-shadow: 0 7px 24px rgba(0, 0, 0, 0.32);
+    border-radius: 4px;
+    padding: 3%;
+    left: 25%;
+    margin: -52px 0 0 0;
+}
+
+.settings-confirm-dialog .title {
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 7px;
+}
+
+.settings-confirm-dialog .message {
+    display: block;
+    margin-bottom: 27px;
+}
+
+.settings-confirm-dialog button {
+    float: right;
+}

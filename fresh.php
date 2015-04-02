@@ -106,12 +106,12 @@ class Fresh
       $query .= ' WHERE ';
       $filter_string = array();
 
-      foreach($filters as $filter){
+      foreach($filters as $field => $value){
 
-        $str = '`' . $filter["field"] . '` = :' . $filter["field"];
+        $str = "`$field` = :$field";
         array_push($filter_string,$str);
 
-        $params[":".$filter["field"]] = $filter["value"];
+        $params[":$field"] = $value; 
 
       }
 
@@ -120,7 +120,7 @@ class Fresh
     }
 
     $sql .= "LIMIT $from,$toFetch;";
-
+    
     $query_obj = $dbh->prepare($query);
 
     $query_obj->execute($params);

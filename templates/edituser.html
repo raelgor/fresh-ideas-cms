@@ -1,7 +1,11 @@
 <div class="edit-user">
+  
   <div class="button-line">
     <md-button class="md-raised" ng-click="back()" aria-label="Back"><span class="icon-undo2"></span></md-button>
-    <md-button class="md-raised md-primary" ng-disabled="!v.changes" aria-label="Save" ng-click="saveUser()">{{ text.save }}</md-button>
+    <md-button class="md-raised md-primary" ng-disabled="!v.changes" aria-label="Save" ng-click="saveUser()">{{ !isNaN(v.tarUserIndex) ? text.save : text.createUser }}</md-button>
+    <span ng-if="!isNaN(v.tarUserIndex)">
+      <md-button class="md-raised" aria-label="Delete" ng-click="deleteUser(v.tarUserIndex,true)">{{ text.delete }}</md-button>
+    </span>
   </div>
   
   <md-select placeholder="{{ text.role }}" ng-model="v.targetedUser.level" ng-change="v.changes = true">
@@ -34,8 +38,8 @@
   </md-input-container>
   
   <md-input-container flex class="settings-basic-input">
-    <label>{{ text.newPassword }}</label>
+    <label>{{ !isNaN(v.tarUserIndex) ? text.newPassword : text.password }}</label>
     <input ng-model="v.targetedUser.password" ng-change="v.changes = true">
   </md-input-container>
-        
+  
 </div>

@@ -10,10 +10,7 @@ if($_NGPOST["request"] == "login-text"){
 if($_NGPOST["request"] == "login"){
 
   $filters = array(
-    array(
-      "field" => "username",
-      "value" => $_NGPOST["username"]
-    )
+    "username" => $_NGPOST["username"]
   );
 
   $user = Fresh::fetch('cms_users',false,$filters);
@@ -49,7 +46,7 @@ if($_NGPOST["request"] == "login"){
 }
 
 if($_NGPOST["request"] == "auth"){
-
+  
   $response["message"] = $user ? "valid_token" : "bad_token";
   $response["lang"] = $user["lang"];
   $response["settings"] = Fresh::fetch('cms_variables',false);
@@ -99,9 +96,86 @@ if($_NGPOST["request"] == "cms-users"){
       "email",
       "image_id",
       "lang",
-      "level" 
-    ),$_NGPOST["from"]);
+      "level",
+      "id"
+    ),array(),$_NGPOST["from"]);
     $response["message"] = "success";
+  } else {
+    $response["message"] = "bad_token";
+  }
+  
+}
+
+if($_NGPOST["request"] == "update-users"){
+  
+  if($user){
+    
+    $subject = $_NGPOST["user"];
+    $prefix  = $config["prefix"];
+    
+    $data = array(
+      "first_name" => $subject["first_name"],
+      "last_name" => $subject["last_name"],
+      "username" => $subject["username"],
+      "email" => $subject["email"],
+      "level" => $subject["level"],
+      "lang" => $subject["lang"],
+      "image_id" => $subject["image_id"]
+    );
+    
+    if($subject["id"]){
+      
+      if($subject["password"]){
+        
+        $updatee = Fresh::fetch('cms_users',array("salt"),array(
+          "id" => $subject["id"]
+        ));
+        
+        $salt = $updatee[0]["salt"];
+        $data["password"] = hash('sha256',$salt . $subject["password"]);
+        
+      }
+      
+      Fresh::update("cms_users",$data,array(
+        "id" => $subject["id"]  
+      ));
+      
+    } else {
+      
+      $subject["password"] = $subject["password"] ? $subject["password"] : '';
+      $salt = uniqid(mt_rand(),true);
+      
+      $data["password"] = hash('sha256',$salt . $subject["password"]);
+      $data["salt"]     = $salt;
+      
+      Fresh::insert('cms_users',$data);
+      
+      $query = $dbh->query("SELECT `id`,`image_id`,`username`,`first_name`,`last_name`,`username`,`email`,`lang`,`level` FROM $prefix"."_cms_users WHERE id = (SELECT max(id) FROM $prefix"."_cms_users)");
+      $response["user"] = $query->fetch(PDO::FETCH_ASSOC);
+    
+    }
+    
+    $response["message"] = "success";
+    
+  } else {
+    $response["message"] = "bad_token";
+  };
+  
+}
+
+if($_NGPOST["request"] == "delete-cms-users"){
+  
+  if($user){
+    
+    foreach($_NGPOST["ids"] as $id){
+      
+      Fresh::delete("cms_users",array("id"=>$id));
+      Fresh::delete("cms_user_session",array("user_id"=>$id));
+      
+    }
+    
+    $response["message"] = "success";
+  
   } else {
     $response["message"] = "bad_token";
   }

@@ -14,4 +14,12 @@
       </div>
     </md-tab>
   </md-tabs>
+  <div class="settings-confirm-dialog">
+    <div class="dialog-window">
+      <span class="title">{{ confirm.title }}</span>
+      <span class="message">{{ confirm.message }}</span>
+      <md-button ng-click="settingsConfirmCallback()" class="md-primary md-default-theme">{{ text.confirm }}</md-button>
+      <md-button ng-click="settingsConfirmClose()" style="margin-right: 10px;">{{ text.cancel }}</md-button>
+    </div>
+  </div>
 </md-dialog>

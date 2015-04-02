@@ -30,12 +30,12 @@ function($scope,$rootScope,dataFactory,$mdToast){
   $scope.saveChanges = function(){
     
     $scope.settings[0].value = $scope.settings[0].value ? 1 : 0;
-    $('[ng-controller="generalCtrl"]').addClass('dark iron');
+    $('.settings-dialog md-tabs').addClass('dark iron');
     $('.settings-dialog .spinner').removeClass('out');
     dataFactory.saveGeneralSettings($scope.settings).then(function(){
       
-      $('[ng-controller="generalCtrl"]').removeClass('dark iron');
-      $('.settings-dialog .spinner').addClass('out');
+      $('.settings-dialog md-tabs').removeClass('dark iron');
+      $('.settings-dialog .spinner').addClass('out'); 
       
       $scope.generalChanges = false;
       $rootScope.settings = jQuery.extend(true,{},$scope.settings); 
